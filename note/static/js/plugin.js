@@ -47,14 +47,3 @@ $('#note-table').on("click",".show-form-delete",ShowForm);
 $('#modal-note').on("submit",".delete-form",SaveForm);
 });
 
-$('#sort').on('change', function() {
-	var sortid = $('#sort').val();
-	$.ajax({
-		type: "GET",
-		url: $(this).attr('data-url'),
-		data: {'sortid': sortid},
-		dataType: 'json',
-	}).done(function (data) {
-		$('#notes').html(data.note_list);
-	});
-});
