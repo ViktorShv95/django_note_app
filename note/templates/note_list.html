@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="page-header">Заметки</h1>
+    {% if request.user.is_authenticated %}
+        <button class="btn btn-success show-form" data-url="{% url 'note_create' %}">
+            <i class="far fa-plus-square"></i>
+        </button>
+    {% endif %}
+  <table class="table table-borderless" id="note-table">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Дата создания</th>
+        <th>Избранная</th>
+      </tr>
+    </thead>
+    {% if request.user.is_authenticated %}
+    <tbody>
+      {% include "note_list2.html" %}
+    </tbody>
+    {% endif %}
+  </table>
+
+  <div class="modal fade" id="modal-note">
+    <div class="modal-dialog">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+{% endblock %}

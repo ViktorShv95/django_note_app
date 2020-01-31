@@ -1,0 +1,35 @@
+{% for note in notes %}
+  <tr>
+    <td>{{ note.title }}</td>
+    <td>{{ note.category }}</td>
+    <td>{{ note.created_at|date:"d M Y G:i" }}</td>
+      {% if note.chosen == True %}
+          <td><i class="fas fa-star"></i></td>
+      {% else %}
+          <td><i class="far fa-star"></i></td>
+      {% endif %}
+    <td>  
+      <button class="btn btn-warning show-form-update" data-url="{% url 'note_update' note.id %}">
+      <i class="fas fa-edit"></i>
+      </button>
+    </td>
+    <td>  
+      <button class="btn btn-danger show-form-delete" data-url="{% url 'note_delete' note.id %}">
+      <i class="far fa-trash-alt"></i>
+      </button>
+    </td>
+    {% if note.ready_to_pub == True %}
+    <td>
+        <form action="{% url 'note_share' note.link_id %}" target="_blank">
+            <button class="btn btn-info">
+                <i class="fas fa-share-square"></i>
+            </button>
+        </form>
+    </td>
+    {% endif %}
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">Нет заметок</td>
+  </tr>
+{% endfor %}
